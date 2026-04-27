@@ -6,6 +6,8 @@ resource "helm_release" "argocd" {
   namespace = "argocd"
   create_namespace = true
   force_update  = true
+  wait = true
+  wait_for_jobs = true
   cleanup_on_fail = true
 
   set =[{

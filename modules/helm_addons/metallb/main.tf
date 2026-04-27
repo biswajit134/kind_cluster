@@ -5,6 +5,9 @@ resource "helm_release" "metallb" {
     version    = "0.15.3"
     namespace  = "metallb-system"
     create_namespace = true
+    wait = true
+    wait_for_jobs = true
+    cleanup_on_fail = true
 }
 
 resource "kubectl_manifest" "IPAddressPool-crd" {
