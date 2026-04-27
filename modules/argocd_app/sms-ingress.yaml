@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: sms-ingress
   namespace: sms-app
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
