@@ -16,3 +16,10 @@ resource "kubectl_manifest" "sms_frontend" {
     wait = true
     yaml_body = templatefile("${path.module}/sms-frontend.yaml", {})
 }
+
+resource "kubectl_manifest" "ingress" {
+    depends_on = [ kubectl_manifest.sms_frontend ]
+    wait = true
+    yaml_body = templatefile("${path.module}/sms-ingress.yaml", {})
+  
+}
