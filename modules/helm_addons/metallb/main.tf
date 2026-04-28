@@ -12,14 +12,12 @@ resource "helm_release" "metallb" {
 
 resource "kubectl_manifest" "IPAddressPool-crd" {
     depends_on = [ helm_release.metallb ]
-    wait = true
     yaml_body = templatefile("${path.module}/IPAddressPool-crd.yml", {})
 #  manifest = yamldecode(templatefile("${path.module}/IPAddressPool-crd.yml", {}))
 }
 
 resource "kubectl_manifest" "L2Advertisement-crd" {
     depends_on = [ kubectl_manifest.IPAddressPool-crd ]
-    wait = true
     yaml_body = templatefile("${path.module}/L2Advertisement-crd.yml", {})
 #  manifest = yamldecode(templatefile("${path.module}/L2Advertisement-crd.yml", {}))
 }
